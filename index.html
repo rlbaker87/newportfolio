@@ -233,25 +233,45 @@
       "Critical failure: Portfolio unimpressed.",
       "System error: Too much corporate energy.",
       "Warning: Fun content ahead. Proceed?",
+      "Please stop clicking OK.",
+      "This is getting embarrassing.",
+      "For the love of - stop.",
+      "Have you considered a different career?",
+      "Still here?",
+      "Incredible. Truly.",
+      "Error 999: Stubbornness detected.",
+      "This is not the portfolio you are looking for.",
+      "We've notified your IT department.",
+      "Your persistence is noted and unappreciated.",
+      "OK fine. You win. Just kidding. You don't.",
+      "Please hold. Your call is not important to us.",
+      "Have you tried turning yourself off and on again?",
+      "Initiating self-destruct... just kidding. Maybe.",
     ];
 
-    let errorCount = 0;
-    let errorTimeout;
+    let msgIndex = 0;
+    let running = false;
+
+    function randomPos() {
+      return {
+        x: 5 + Math.random() * 60,
+        y: 5 + Math.random() * 65
+      };
+    }
 
     function spawnError() {
-      if (errorCount >= 12) return;
-      errorCount++;
+      if (!running) return;
 
       const popup = document.createElement('div');
       popup.className = 'error-popup';
 
-      const x = 10 + Math.random() * 55;
-      const y = 10 + Math.random() * 60;
-      popup.style.left = x + '%';
-      popup.style.top = y + '%';
-      popup.style.zIndex = 1000 + errorCount;
+      const pos = randomPos();
+      popup.style.left = pos.x + '%';
+      popup.style.top = pos.y + '%';
+      popup.style.zIndex = 1000 + document.querySelectorAll('.error-popup').length;
 
-      const msg = messages[errorCount % messages.length];
+      const msg = messages[msgIndex % messages.length];
+      msgIndex++;
 
       popup.innerHTML = `
         <div class="popup-titlebar">
@@ -260,22 +280,23 @@
         </div>
         <p style="margin: 0 0 12px;">${msg}</p>
         <div style="display: flex; justify-content: flex-end;">
-          <button class="popup-btn" onclick="this.closest('.error-popup').remove(); setTimeout(spawnError, 200);">OK</button>
+          <button class="popup-btn" onclick="this.closest('.error-popup').remove();">OK</button>
         </div>
       `;
 
       document.body.appendChild(popup);
 
-      if (errorCount < 12) {
-        clearTimeout(errorTimeout);
-        errorTimeout = setTimeout(spawnError, 600 + Math.random() * 400);
-      }
+      const delay = 120 + Math.random() * 180;
+      setTimeout(spawnError, delay);
     }
 
     function hrYes() {
+      running = true;
       spawnError();
-      setTimeout(spawnError, 700);
-      setTimeout(spawnError, 1300);
+      setTimeout(spawnError, 80);
+      setTimeout(spawnError, 160);
+      setTimeout(spawnError, 240);
+      setTimeout(spawnError, 320);
     }
 
     function hrNo() {
