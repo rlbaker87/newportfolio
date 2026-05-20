@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robert Baker | Senior Instructional Designer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #F8F9FA;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      background: #1B365D;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar .logo { color: #fff; font-size: 1.2em; font-weight: 700; }
+    .navbar .nav-links { display: flex; gap: 20px; }
+    .navbar .nav-links span { color: rgba(255,255,255,0.7); font-size: 0.9em; }
+
+    .hero {
+      background: linear-gradient(135deg, #1B365D 0%, #00B4A6 100%);
+      color: #fff;
+      padding: 70px 24px 60px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 2.8em; font-weight: 700; margin-bottom: 8px; }
+    .hero .tagline { font-size: 1.3em; font-weight: 600; margin-bottom: 10px; opacity: 0.95; }
+    .hero .subtitle { font-size: 1em; opacity: 0.85; line-height: 1.7; max-width: 600px; margin: 0 auto; }
+
+    .gate-section {
+      flex: 1;
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    .gate-card {
+      background: #fff;
+      border-radius: 12px;
+      border-top: 5px solid #00B4A6;
+      padding: 40px 32px;
+      max-width: 480px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .gate-card p {
+      font-size: 1.1em;
+      color: #343A40;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .gate-card strong {
+      color: #1B365D;
+      font-size: 1.2em;
+    }
+
+    .btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      padding: 13px 30px;
+      font-size: 1em;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-yes { background: #1B365D; color: #fff; }
+    .btn-no { background: #F07B3F; color: #fff; }
+
+    .welcome-screen {
+      display: none;
+      flex: 1;
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    .welcome-card {
+      background: #fff;
+      border-radius: 12px;
+      border-top: 5px solid #F07B3F;
+      padding: 40px 32px;
+      max-width: 520px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .welcome-badge {
+      display: inline-block;
+      background: #00B4A6;
+      color: #fff;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .welcome-card h2 {
+      color: #1B365D;
+      font-size: 1.8em;
+      margin-bottom: 16px;
+    }
+
+    .welcome-card p {
+      color: #343A40;
+      font-size: 1.05em;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      background: #343A40;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85em;
+    }
+
+    .error-popup {
+      position: fixed;
+      background: #fff;
+      border: 1.5px solid #ccc;
+      border-top: 28px solid #1B365D;
+      border-radius: 4px;
+      padding: 16px 20px 14px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.25);
+      width: 220px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 13px;
+      color: #333;
+    }
+
+    .popup-titlebar {
+      position: absolute;
+      top: -22px;
+      left: 0;
+      right: 0;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .popup-close {
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1;
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 0;
+    }
+
+    .popup-btn {
+      background: #1B365D;
+      color: #fff;
+      border: none;
+      padding: 5px 14px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="logo">Robert Baker</span>
+    <div class="nav-links">
+      <span>Home</span>
+      <span>Projects</span>
+      <span>About</span>
+      <span>Contact</span>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Robert Baker</h1>
+    <div class="tagline">Senior Instructional Designer | Learning Strategist</div>
+    <div class="subtitle">Designing high-impact learning solutions that drive performance in healthcare and enterprise environments</div>
+  </section>
+
+  <section class="gate-section" id="gate">
+    <div class="gate-card">
+      <p>Before we go any further...</p>
+      <p><strong>Are you from HR?</strong></p>
+      <div class="btn-row">
+        <button class="btn btn-yes" onclick="hrYes()">Yes</button>
+        <button class="btn btn-no" onclick="hrNo()">No</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="welcome-screen" id="welcome">
+    <div class="welcome-card">
+      <span class="welcome-badge">You're in. Welcome.</span>
+      <h2>Good. You passed the vibe check.</h2>
+      <p>Welcome to the portfolio. You're clearly someone with good judgment and discerning taste.</p>
+      <p>Feel free to look around. The good stuff is right this way.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Robert Baker. All rights reserved.
+  </footer>
+
+  <script>
+    const messages = [
+      "Access denied.",
+      "Nope.",
+      "Error 403: Not for you.",
+      "Have you tried asking nicely?",
+      "This portfolio is NOT for HR.",
+      "Please close this window.",
+      "Error 418: I'm a teapot.",
+      "Unauthorized user detected.",
+      "Your manager will hear about this.",
+      "Critical failure: Portfolio unimpressed.",
+      "System error: Too much corporate energy.",
+      "Warning: Fun content ahead. Proceed?",
+    ];
+
+    let errorCount = 0;
+    let errorTimeout;
+
+    function spawnError() {
+      if (errorCount >= 12) return;
+      errorCount++;
+
+      const popup = document.createElement('div');
+      popup.className = 'error-popup';
+
+      const x = 10 + Math.random() * 55;
+      const y = 10 + Math.random() * 60;
+      popup.style.left = x + '%';
+      popup.style.top = y + '%';
+      popup.style.zIndex = 1000 + errorCount;
+
+      const msg = messages[errorCount % messages.length];
+
+      popup.innerHTML = `
+        <div class="popup-titlebar">
+          <span>System Alert</span>
+          <button class="popup-close" onclick="this.closest('.error-popup').remove()">x</button>
+        </div>
+        <p style="margin: 0 0 12px;">${msg}</p>
+        <div style="display: flex; justify-content: flex-end;">
+          <button class="popup-btn" onclick="this.closest('.error-popup').remove(); setTimeout(spawnError, 200);">OK</button>
+        </div>
+      `;
+
+      document.body.appendChild(popup);
+
+      if (errorCount < 12) {
+        clearTimeout(errorTimeout);
+        errorTimeout = setTimeout(spawnError, 600 + Math.random() * 400);
+      }
+    }
+
+    function hrYes() {
+      spawnError();
+      setTimeout(spawnError, 700);
+      setTimeout(spawnError, 1300);
+    }
+
+    function hrNo() {
+      document.getElementById('gate').style.display = 'none';
+      const welcome = document.getElementById('welcome');
+      welcome.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
